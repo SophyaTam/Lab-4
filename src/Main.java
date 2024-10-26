@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Voice voice = new Voice();
-        voice.setVidVoice();
+        Advert advertManager = new Advert();
+        int choice = advertManager.chooseAdvert();
+        advertManager.showAdverts();
     }
     }
