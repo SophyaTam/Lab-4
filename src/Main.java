@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        EndWork endWork = new EndWork();
-        endWork.end();
+        Voice voice = new Voice();
+        voice.setVidVoice();
     }
     }
