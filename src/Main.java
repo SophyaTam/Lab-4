@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Advert advertManager = new Advert();
-        int choice = advertManager.chooseAdvert();
-        advertManager.showAdverts();
-    }
-    }
+        MainMenu menu = new MainMenu();
+        Video video = new Video();
+        video.chooseVid(menu);
+    }}
