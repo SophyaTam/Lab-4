@@ -1,30 +1,28 @@
 import java.util.Scanner;
 
 public class Voice {
-    private int loudness; // Changed to a more descriptive name
+    private Scanner scanner; // Добавляем поле scanner
 
-    public void setVidVoice() { // Changed method name for clarity
-        Scanner scanner = new Scanner(System.in);
+    public Voice(Scanner scanner) { // Конструктор для получения Scanner
+        this.scanner = scanner;
+    }
+
+    public void setVidVoice() {
         int loudness;
-
         do {
             System.out.print("Введите уровень громкости (от 0 до 100): ");
             if (scanner.hasNextInt()) {
                 loudness = scanner.nextInt();
                 if (loudness >= 0 && loudness <= 100) {
-                    this.loudness = loudness; // Store the valid loudness
-                    System.out.println("Уровень громкости видео изменен до " + loudness);
-                    break; // Exit the loop if input is valid
+                    System.out.println("Уровень громкости изменен до " + loudness);
+                    break;
                 } else {
-                    System.out.println("Ошибка: уровень громкости должен быть в пределах от 0 до 100.");
-                    scanner.nextLine(); // Consume the rest of the line
+                    System.out.println("Ошибка: Уровень громкости должен быть от 0 до 100.");
                 }
             } else {
-                System.out.println("Ошибка: введите числовое значение.");
-                scanner.next(); // Consume the non-integer input
+                System.out.println("Ошибка: Введите числовое значение.");
+                scanner.next(); // Считываем неверный ввод
             }
-        } while (true); // Loop until valid input is received
-
-        scanner.close();
+        } while (true);
     }
 }

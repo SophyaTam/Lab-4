@@ -4,44 +4,47 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 
-public class ButtonStopVid extends Video { // ButtonStopVid extends Video
-    // Method to stop the video via input 1
-    public boolean stopVids() {
-        Scanner scanner = new Scanner(System.in);
-        int choice;
-        System.out.print("Если хотите остановить видео, нажмите 1, иначе - 0: ");
-        while (!scanner.hasNextInt()) {
-            System.out.println("Неверный ввод! Пожалуйста, введите 1 или 0.");
-            scanner.next();
+class ButtonStopVid {
+    public boolean stopVids(Scanner scanner) {
+        int choice = -1;
+        while (choice != 1 && choice != 0) {
+            try {
+                System.out.print("Остановить видео? (1 - да, 0 - нет): ");
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+            } catch (InputMismatchException e) {
+                System.out.println("Неверный ввод! Пожалуйста, введите 1 или 0.");
+                scanner.next(); // Consume bad input
+            } catch (NoSuchElementException e) {
+                System.err.println("Ошибка ввода! Поток ввода закрыт.");
+                return false; // Indicate failure
+            }
         }
-        choice = scanner.nextInt();
-        scanner.close();
         if (choice == 1) {
             System.out.println("Видео остановлено");
         }
         return choice == 1;
     }
 
-    // Method to resume viewing via input 1
-    public void onVid() {
-        Scanner scanner = new Scanner(System.in);
-        int choice;
-        while (true) {
-            if (stopVids()) {
-                System.out.print("Для дальнейшего просмотра нажмите 1: ");
-                while (!scanner.hasNextInt()) {
+    public void onVid(Scanner scanner) {
+        if (stopVids(scanner)) {
+            int choice = 0;
+            while (choice != 1) {
+                try {
+                    System.out.print("Продолжить просмотр? (1 - да): ");
+                    choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                } catch (InputMismatchException e) {
                     System.out.println("Неверный ввод! Пожалуйста, введите 1.");
-                    scanner.next();
+                    scanner.next(); // Consume bad input
+                } catch (NoSuchElementException e) {
+                    System.err.println("Ошибка ввода! Поток ввода закрыт.");
+                    return; // Indicate failure
                 }
-                choice = scanner.nextInt();
-                if (choice == 1) {
-                    break;
-                }
-            } else {
-                break;
             }
         }
-        scanner.close();
     }
 }
