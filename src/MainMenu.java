@@ -41,7 +41,6 @@ public class MainMenu
                 scanner.next(); // Очистка буфера
             }
         }
-        scanner.close();
         return genre;
 }
 }

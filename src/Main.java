@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu menu = new MainMenu();
-        ButtonStopVid stopV = new ButtonStopVid();
+        Advert advert = new Advert();
+        advert.showAdverts();
         Video video = new Video();
-        video.chooseVid(menu, stopV);
+        video.chooseVid(); // Передаем Scanner в chooseVid
     }}

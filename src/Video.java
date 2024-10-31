@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,101 +14,86 @@ import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
-
-public class Video {
-    private static final int N = 10; // Define N here. Adjust as needed.
-    private static final int M = 100; // Define M here. Adjust as needed.
-    private List<String> shownVideos;
-    private List<String> availableVideos;
+class Video {
+    private List<String> lastVid;
+    private List<String> allVid;
+    private final int N = 10; // Adjust the size according to requirements
+    private final int M = 100; // Adjust the size according to requirements
 
     public Video() {
-        shownVideos = new ArrayList<>(N);
-        availableVideos = new ArrayList<>(N);
-        initializeShownVideos();
+        lastVid = new ArrayList<>(N);
+        allVid = new ArrayList<>(N);
+        LastVids();
     }
 
-    // Method to populate the array with video names for viewing
-    public void openVid(int genre) {
-        String filePath = "C:\\Users\\User\\IdeaProjects\\untitled\\src\\" + genre + ".txt";
+    // Method to fill the array with video names for viewing
+    public void openVid() {
+        MainMenu menu = new MainMenu();
+        int djanre = menu.chooseOptions();
+        String filePath = "C:\\Users\\User\\IdeaProjects\\untitled\\src\\" + djanre + ".txt";
         try (Scanner fileScanner = new Scanner(new File(filePath))) {
-            while (fileScanner.hasNextLine() && availableVideos.size() < N) {
-                availableVideos.add(fileScanner.nextLine());
+            while (fileScanner.hasNextLine() && allVid.size() < N) {
+                allVid.add(fileScanner.nextLine());
             }
         } catch (FileNotFoundException e) {
             System.err.println("Ошибка открытия файла: " + e.getMessage());
         }
     }
 
-    // Method to populate the array with played videos
-    private void initializeShownVideos() {
+    // Method to fill the array with played videos
+    public void LastVids() {
         for (int i = 0; i < N; i++) {
-            shownVideos.add("");
+            lastVid.add(""); // Initializing to empty strings
         }
     }
+    public void chooseVid() {
+        openVid();
+        int totalVideos = allVid.size();
+        int vidPlayerOn = 0; // Change here to 'int'
 
-    // Method to output a random video
-    public void chooseVid(MainMenu menu, ButtonStopVid stopV) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            int genre = menu.chooseOptions();
-            openVid(genre);
-            int totalVideos = availableVideos.size();
+        if (totalVideos == 0) {
+            System.out.println("Нет доступных видео для воспроизведения!");
+            return;
+        }
 
-            if (totalVideos == 0) {
-                System.out.println("Нет доступных видео для воспроизведения!");
-                return;
-            }
+        Random random = new Random();
+        while (totalVideos > 0) {
+            int randomIndex;
+            boolean allow;
 
-            while (totalVideos > 0) {
-                Random random = new Random();
-                int randomIndex;
-                boolean allow;
-                do {
-                    randomIndex = random.nextInt(totalVideos);
-                    allow = true;
-                    for (String shownVideo : shownVideos) {
-                        if (shownVideo.equals(availableVideos.get(randomIndex))) {
-                            allow = false;
-                            break;
-                        }
-                    }
-                } while (!allow);
-                for (int i = 0; i < shownVideos.size(); i++) {
-                    if (shownVideos.get(i).isEmpty()) {
-                        shownVideos.set(i, availableVideos.get(randomIndex));
+            do {
+                randomIndex = random.nextInt(totalVideos);
+                allow = true;
+                for (String lastVideo : lastVid) {
+                    if (lastVideo.equals(allVid.get(randomIndex))) {
+                        allow = false;
                         break;
                     }
                 }
-                System.out.println("Воспроизводится видео: " + availableVideos.get(randomIndex));
-                try {
-                    stopV.onVid(scanner);
-                } catch (InputMismatchException e) {
-                    System.out.println("Неверный ввод! Пожалуйста, введите число.");
-                    scanner.next(); // Consume bad input
-                } catch (NoSuchElementException e) {
-                    System.err.println("Ошибка ввода! Поток ввода закрыт.");
-                    return; // Indicate failure
-                }
+            } while (!allow);
 
-                totalVideos--;
-
-                int choice = -1;
-                while (choice != 1 && choice != 0) {
-                    try {
-                        System.out.print("Выйти из плеера? (1 - да, 0 - нет): ");
-                        choice = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
-                    } catch (InputMismatchException e) {
-                        System.out.println("Неверный ввод! Пожалуйста, введите 1 или 0.");
-                        scanner.next(); // Consume bad input
-                    } catch (NoSuchElementException e) {
-                        System.err.println("Ошибка ввода! Поток ввода закрыт.");
-                        return; // Indicate failure
-                    }
-                }
-                if (choice == 1) {
+            for (int i = 0; i < N; i++) {
+                if (lastVid.get(i).isEmpty()) {
+                    lastVid.set(i, allVid.get(randomIndex));
                     break;
                 }
             }
+
+            System.out.println("Воспроизводится видео: " + allVid.get(randomIndex) + "........");
+            ButtonStopVid vid = new ButtonStopVid();
+            vid.onVid();
+            totalVideos--;
+
+            System.out.println("Если вы хотите выйти из плеера, нажмите 1, иначе - 0");
+            Scanner scanner = new Scanner(System.in);
+            vidPlayerOn = scanner.nextInt(); // Use the existing int variable
+
+            if (vidPlayerOn == 1) {
+                break; // Exit loop if user wants to stop
+            }
+        }
+        if (vidPlayerOn == 1) {
+            chooseVid(); // Recursively call to chooseVid if user wants to continue
         }
     }
 }

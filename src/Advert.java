@@ -24,7 +24,6 @@ public class Advert {
             scanner.next();
         }
         choice = scanner.nextInt();
-        scanner.close();
         return choice;
     }
 

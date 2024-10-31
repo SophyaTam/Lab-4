@@ -6,14 +6,13 @@ public class ButtonStopAdv extends Advert { // ButtonStopAdv now extends Advert
         Scanner scanner = new Scanner(System.in);
         int choice;
         do {
-            System.out.print("Если хотите остановить видео, нажмите 1, иначе - 0: ");
+            System.out.print("Если хотите остановить рекламу, нажмите 1, иначе - 0: ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 if (choice >= 0 && choice <= 1) {
-                    scanner.close();
                     return (choice == 1);
                 } else {
-                    System.out.println("Ошибка: Если хотите остановить видео, нажмите 1, иначе - 0.");
+                    System.out.println("Ошибка: Если хотите остановить рекламу, нажмите 1, иначе - 0.");
                     scanner.nextLine();
                 }
             } else {
@@ -46,6 +45,5 @@ public class ButtonStopAdv extends Advert { // ButtonStopAdv now extends Advert
                 break;
             }
         }
-        scanner.close();
     }
 }
