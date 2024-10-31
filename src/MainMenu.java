@@ -11,11 +11,11 @@ public class MainMenu
     }
 
     private void addOptions() {
-        availableOptions.add("1-Детское видео");
-        availableOptions.add("2-Документальные фильмы");
+        availableOptions.add("1-Детское ");
+        availableOptions.add("2-Детективы");
         availableOptions.add("3-Комедии");
-        availableOptions.add("4-Триллер");
-        availableOptions.add("5-Мультфильмы");
+        availableOptions.add("4-Мелодрамы");
+        availableOptions.add("5-Сериалы");
     }
     public int chooseOptions() {
         Scanner scanner = new Scanner(System.in);

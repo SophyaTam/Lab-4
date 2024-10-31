@@ -13,6 +13,5 @@ public class EndWork {
             } else {
                 System.out.println("Работа проигрывателя продолжается.");
             }
-        scanner.close(); // Close the scanner
     }
 }

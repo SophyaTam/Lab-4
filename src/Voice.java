@@ -1,14 +1,10 @@
 import java.util.Scanner;
 
 public class Voice {
-    private Scanner scanner; // Добавляем поле scanner
-
-    public Voice(Scanner scanner) { // Конструктор для получения Scanner
-        this.scanner = scanner;
-    }
 
     public void setVidVoice() {
         int loudness;
+        Scanner scanner = new Scanner(System.in);
         do {
             System.out.print("Введите уровень громкости (от 0 до 100): ");
             if (scanner.hasNextInt()) {

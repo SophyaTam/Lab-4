@@ -78,10 +78,13 @@ class Video {
                     break;
                 }
             }
-
+            Voice voice=new Voice();
+            voice.setVidVoice();
             System.out.println("Воспроизводится видео: " + allVid.get(randomIndex) + "........");
             ButtonStopVid vid = new ButtonStopVid();
             vid.onVid();
+            EndWork endWork = new EndWork();
+            endWork.end();
             totalVideos--;
 
             System.out.println("Если вы хотите выйти из плеера, нажмите 1, иначе - 0");
