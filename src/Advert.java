@@ -13,8 +13,6 @@ public class Advert {
         shownAdverts = new ArrayList<>(N);
         initializeAdverts();
     }
-
-    // Method to get user input for enabling/disabling adverts
     public int chooseAdvert() {
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -37,15 +35,11 @@ public class Advert {
 
         return choice;
     }
-
-    // Method to initialize advert IDs
     private void initializeAdverts() {
         for (int i = 1; i <= N; i++) {
             advertIds.add(i);
         }
     }
-
-    // Method to show adverts
     public void showAdverts() {
         int turnOn = chooseAdvert();
         if (turnOn == 1) {

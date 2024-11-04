@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-public class ButtonStopAdv extends Advert { // ButtonStopAdv now extends Advert
-    // Method to stop the advertisement (returns true if stopped, false otherwise)
+public class ButtonStopAdv extends Advert {
     public boolean stopAdverts() {
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -21,8 +20,6 @@ public class ButtonStopAdv extends Advert { // ButtonStopAdv now extends Advert
             }
         } while (true);
     }
-
-    // Method to resume playing the video
     public void onAdv() {
         Scanner scanner = new Scanner(System.in);
         int choice;

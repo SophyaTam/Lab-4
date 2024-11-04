@@ -1,8 +1,7 @@
 import java.util.Scanner;
-import java.util.*;
 
 class ButtonStopVid extends Video {
-    private char stopVid;  // Изменяем типа на char
+    private char stopVid;
     private char vidPlayerOn;
 
     // Метод остановки видео
@@ -16,7 +15,7 @@ class ButtonStopVid extends Video {
             }
         } else {
             System.out.println("No input available.");
-            stopVid = '0'; // Возвращаем значение по умолчанию
+            stopVid = '0';
         }
         return stopVid;
     }
