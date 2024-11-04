@@ -18,12 +18,23 @@ public class Advert {
     public int chooseAdvert() {
         Scanner scanner = new Scanner(System.in);
         int choice;
+
         System.out.print("Введите 1, если хотите добавить рекламу, и 0 - если нет: ");
-        while (!scanner.hasNextInt()) {
-            System.out.println("Неверный ввод! Пожалуйста, введите 1 или 0.");
-            scanner.next();
+
+        while (true) {
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice == 0 || choice == 1) {
+                    break; // Выходим из цикла, если ввод корректен
+                } else {
+                    System.out.println("Неверный ввод! Пожалуйста, введите 1 или 0.");
+                }
+            } else {
+                System.out.println("Неверный ввод! Пожалуйста, введите целое число (1 или 0).");
+                scanner.next(); // Очищаем буфер сканера от некорректного ввода
+            }
         }
-        choice = scanner.nextInt();
+
         return choice;
     }
 

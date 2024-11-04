@@ -30,7 +30,7 @@ class Video {
     public void openVid() {
         MainMenu menu = new MainMenu();
         int djanre = menu.chooseOptions();
-        String filePath = "C:\\Users\\User\\IdeaProjects\\untitled\\src\\" + djanre + ".txt";
+        String filePath = djanre + ".txt";
         try (Scanner fileScanner = new Scanner(new File(filePath))) {
             while (fileScanner.hasNextLine() && allVid.size() < N) {
                 allVid.add(fileScanner.nextLine());
