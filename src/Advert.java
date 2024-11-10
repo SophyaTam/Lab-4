@@ -16,9 +16,7 @@ public class Advert {
     public int chooseAdvert() {
         Scanner scanner = new Scanner(System.in);
         int choice;
-
         System.out.print("Введите 1, если хотите добавить рекламу, и 0 - если нет: ");
-
         while (true) {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();

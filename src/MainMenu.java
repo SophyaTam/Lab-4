@@ -3,11 +3,9 @@ import java.util.Scanner;
 
 public class MainMenu {
     private MenuOption[] availableOptions;
-
     // Внутренний класс для представления пункта меню
     private static class MenuOption {
         String description;
-
         MenuOption(String description) {
             this.description = description;
         }
@@ -16,12 +14,10 @@ public class MainMenu {
             return description;
         }
     }
-
     public MainMenu() {
         availableOptions = new MenuOption[5]; // Фиксированный размер массива
         addOptions();
     }
-
     private void addOptions() {
         availableOptions[0] = new MenuOption("1-Детское");
         availableOptions[1] = new MenuOption("2-Детективы");
