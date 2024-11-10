@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Voice {
-    private VoiceInputHelper voiceInputHelper = new VoiceInputHelper();
+    private static VoiceInputHelper voiceInputHelper = new VoiceInputHelper();
 
     public void setVidVoice() {
         int loudness = voiceInputHelper.getLoudness();
