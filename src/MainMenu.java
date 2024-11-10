@@ -1,46 +1,59 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MainMenu
-{
-    private ArrayList<String> availableOptions;
+public class MainMenu {
+    private MenuOption[] availableOptions;
+
+    // Внутренний класс для представления пункта меню
+    private static class MenuOption {
+        String description;
+
+        MenuOption(String description) {
+            this.description = description;
+        }
+        @Override
+        public String toString() {
+            return description;
+        }
+    }
 
     public MainMenu() {
-        availableOptions = new ArrayList<>();
+        availableOptions = new MenuOption[5]; // Фиксированный размер массива
         addOptions();
     }
 
     private void addOptions() {
-        availableOptions.add("1-Детское ");
-        availableOptions.add("2-Детективы");
-        availableOptions.add("3-Комедии");
-        availableOptions.add("4-Мелодрамы");
-        availableOptions.add("5-Сериалы");
+        availableOptions[0] = new MenuOption("1-Детское");
+        availableOptions[1] = new MenuOption("2-Детективы");
+        availableOptions[2] = new MenuOption("3-Комедии");
+        availableOptions[3] = new MenuOption("4-Мелодрамы");
+        availableOptions[4] = new MenuOption("5-Сериалы");
     }
+
     public int chooseOptions() {
         Scanner scanner = new Scanner(System.in);
         int genre = 0;
 
         System.out.println("Доступные направления видео:");
-        for (int i = 0; i < availableOptions.size(); i++) {
-            System.out.println(availableOptions.get(i));
+        for (int i = 0; i < availableOptions.length; i++) {
+            System.out.println(availableOptions[i]);
         }
 
-        System.out.print("Выберите желаемое направление (1-5): ");
+        System.out.print("Выберите желаемое направление (1-" + availableOptions.length + "): ");
         while (true) {
             if (scanner.hasNextInt()) {
                 genre = scanner.nextInt();
-                if (genre >= 1 && genre <= availableOptions.size()) {
-                    break; // Выход из цикла, если ввод корректный
+                if (genre >= 1 && genre <= availableOptions.length) {
+                    break;
                 } else {
-                    System.out.println("Неверный ввод! Пожалуйста, введите число от 1 до " + availableOptions.size() + ".");
-                    scanner.next(); // Очистка буфера
+                    System.out.println("Неверный ввод! Пожалуйста, введите число от 1 до " + availableOptions.length + ".");
+                    scanner.next();
                 }
             } else {
                 System.out.println("Неверный ввод! Пожалуйста, введите число.");
-                scanner.next(); // Очистка буфера
+                scanner.next();
             }
         }
         return genre;
-}
+    }
 }
