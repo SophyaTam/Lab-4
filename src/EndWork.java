@@ -6,7 +6,6 @@ public class EndWork {
         int endAll = 0;
         System.out.println("Если хотите завершить работу видеопроигрывателя, нажмите 7:");
         endAll = scanner.nextInt();
-
         if (endAll == 7) {
             System.out.println("Завершение сеанса...");
             scanner.close();

@@ -6,6 +6,12 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+class EmptyFileException extends Exception {
+    public EmptyFileException(String message) {
+        super(message);
+    }
+}
+
 class Video {
     private List<String> lastVid;
     private List<String> allVid;
@@ -22,11 +28,18 @@ class Video {
         int djanre = menu.chooseOptions();
         String filePath = djanre + ".txt";
         try (Scanner fileScanner = new Scanner(new File(filePath))) {
+            if (!fileScanner.hasNextLine()) {
+                throw new EmptyFileException("File is empty: " + filePath);
+            }
             while (fileScanner.hasNextLine() && allVid.size() < N) {
                 allVid.add(fileScanner.nextLine());
             }
         } catch (FileNotFoundException e) {
-            System.err.println("Ошибка открытия файла: " + e.getMessage());
+            System.err.println("Error opening file: " + e.getMessage());
+        } catch (EmptyFileException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) { //This is a good idea to handle any unexpected exception.
+            System.err.println("An unexpected error occurred: " + e.getMessage());
         }
     }
 
