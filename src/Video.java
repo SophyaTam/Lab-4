@@ -80,7 +80,13 @@ class Video {
                     break;
                 }
             }
-            Voice voice=new Voice();
+            // Создаем объект VoiceInputHelper, который реализует VoiceInput
+            VoiceInput voiceInputHelper = new VoiceInputHelper();
+
+            // Создаем объект Voice, передавая ему voiceInputHelper
+            Voice voice = new Voice(voiceInputHelper);
+
+            // Вызываем метод для установки громкости
             voice.setVidVoice();
             System.out.println("Воспроизводится видео: " + allVid.get(randomIndex) + "........");
             ButtonStopVid vid = new ButtonStopVid();

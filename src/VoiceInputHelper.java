@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class VoiceInputHelper {
+class VoiceInputHelper implements VoiceInput {
     public int getLoudness() {
         int loudness;
         Scanner scanner = new Scanner(System.in);
