@@ -4,15 +4,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Advert {
-    private static final int N = 10; // Define N here. Adjust as needed.
     private List<Integer> advertIds;
     private List<Integer> shownAdverts;
 
-    public Advert() {
-        advertIds = new ArrayList<>(N);
-        shownAdverts = new ArrayList<>(N);
-        initializeAdverts();
+    // Параметризованный конструктор
+    public Advert(int size) {
+        advertIds = new ArrayList<>(size);
+        shownAdverts = new ArrayList<>(size);
+        initializeAdverts(size); // Теперь вызываем метод с параметром
     }
+
+    // Метод для выбора рекламы
     public int chooseAdvert() {
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -30,14 +32,17 @@ public class Advert {
                 scanner.next(); // Очищаем буфер сканера от некорректного ввода
             }
         }
-
         return choice;
     }
-    private void initializeAdverts() {
-        for (int i = 1; i <= N; i++) {
+
+    // Инициализация списка рекламы
+    private void initializeAdverts(int size) {
+        for (int i = 1; i <= size; i++) {
             advertIds.add(i);
         }
     }
+
+    // Метод для показа рекламы
     public void showAdverts() {
         int turnOn = chooseAdvert();
         if (turnOn == 1) {

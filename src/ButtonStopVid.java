@@ -19,7 +19,13 @@ class ButtonStopVid extends Video {
         }
         return stopVid;
     }
-
+    // Перегрузка метода chooseVid() из базового класса
+    @Override
+    public void chooseVid() {
+        // Вызов метода базового класса
+        super.chooseVid(); // Вызываем метод chooseVid() из Video
+        System.out.println("Видео выбранно"); // Ваша дополнительная логика
+    }
     // Метод для продолжения просмотра
     public void onVid() {
         Scanner scanner = new Scanner(System.in);

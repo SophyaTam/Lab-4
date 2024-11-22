@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+interface VoiceInput {
+    int getLoudness();
+}
 public class Voice {
     private static VoiceInputHelper voiceInputHelper = new VoiceInputHelper();
 

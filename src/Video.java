@@ -13,8 +13,8 @@ class EmptyFileException extends Exception {
 }
 
 class Video {
-    private List<String> lastVid;
-    private List<String> allVid;
+    protected List<String> lastVid;
+    protected List<String> allVid;
     private final int N = 10;
     private final int M = 100;
 
