@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Advert {
+public class Advert implements Cloneable {
     private List<Integer> advertIds;
     private List<Integer> shownAdverts;
 
@@ -11,7 +11,7 @@ public class Advert {
     public Advert(int size) {
         advertIds = new ArrayList<>(size);
         shownAdverts = new ArrayList<>(size);
-        initializeAdverts(size); // Теперь вызываем метод с параметром
+        initializeAdverts(size);
     }
 
     // Метод для выбора рекламы
@@ -53,7 +53,7 @@ public class Advert {
                 randomIndex = random.nextInt(advertIds.size());
                 allow = true;
                 for (int shownAdvert : shownAdverts) {
-                    if (advertIds.get(randomIndex) == shownAdvert) {
+                    if (advertIds.get(randomIndex).equals(shownAdvert)) {
                         allow = false;
                         break;
                     }
@@ -64,6 +64,13 @@ public class Advert {
             adv.onAdv();
             shownAdverts.add(advertIds.get(randomIndex));
         }
+    }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Advert cloned = (Advert) super.clone();
+        cloned.advertIds = new ArrayList<>(this.advertIds);
+        cloned.shownAdverts = new ArrayList<>(this.shownAdverts);
+        return cloned;
     }
 }
 
